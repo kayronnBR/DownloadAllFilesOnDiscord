@@ -1,0 +1,31 @@
+    console.log(`%c[Discord Downloader] 🚀 ${linksUnicos.length} arquivos encontrados!`, "color: #5865F2; font-weight: bold; font-size: 14px;");
+    console.log("%c[AVISO] Fique de olho no topo direito da tela (perto da barra de endereços). Se aparecer um ícone de bloqueio de download, clique nele e selecione 'Sempre permitir'.", "color: #ff9900; font-weight: bold;");
+
+    // Função de atraso para o navegador respirar
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    // 2. Executa a fila de downloads
+    for (let i = 0; i < linksUnicos.length; i++) {
+        const url = linksUnicos[i];
+        const nomeArquivo = url.split('/').pop().split('?')[0];
+
+        console.log(`%c[${i + 1}/${linksUnicos.length}] Baixando: ${nomeArquivo}`, "color: #23a55a; font-weight: bold;");
+
+        // Cria um elemento invisível, simula o clique nativo e deleta ele
+        const a = document.createElement('a');
+        a.href = url;
+        a.setAttribute('download', nomeArquivo);
+        // O truque para não abrir aba nova e forçar o download de arquivos desconhecidos (.001, .002)
+        a.target = '_self'; 
+        
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        // 3. O SEGREDO: Tempo de espera. 
+        // Aumentei para 2 segundos. Se colocar rápido demais, o navegador bloqueia a partir do segundo arquivo.
+        await delay(2000); 
+    }
+
+    console.log("%c[Discord Downloader] :tada: Fim da fila! Todos os arquivos visíveis foram processados.", "color: #5865F2; font-weight: bold; font-size: 14px;");
+})();
