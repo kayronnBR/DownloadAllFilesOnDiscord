@@ -37,7 +37,7 @@ clear();
 
         // 3. O SEGREDO: Tempo de espera. 
         // Aumentei para 2 segundos. Se colocar rápido demais, o navegador bloqueia a partir do segundo arquivo.
-        await delay(2000); 
+        await delay(800); 
     }
 
     console.log("%c[Discord Downloader] 🎉 Fim da fila! Todos os arquivos visíveis foram processados.", "color: #5865F2; font-weight: bold; font-size: 14px;");
