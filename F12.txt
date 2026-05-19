@@ -1,3 +1,16 @@
+clear();
+(async () => {
+    // 1. Captura os links dos anexos
+    const selector = 'a[href*="cdn.discordapp.com/attachments/"], a[href*="media.discordapp.net/attachments/"]';
+    const elements = document.querySelectorAll(selector);
+    const urls = Array.from(elements).map(el => el.href).filter(Boolean);
+    const linksUnicos = [...new Set(urls)];
+
+    if (linksUnicos.length === 0) {
+        console.error("[Discord Downloader] Nenhum arquivo encontrado na tela. Role o chat para cima!");
+        return;
+    }
+
     console.log(`%c[Discord Downloader] 🚀 ${linksUnicos.length} arquivos encontrados!`, "color: #5865F2; font-weight: bold; font-size: 14px;");
     console.log("%c[AVISO] Fique de olho no topo direito da tela (perto da barra de endereços). Se aparecer um ícone de bloqueio de download, clique nele e selecione 'Sempre permitir'.", "color: #ff9900; font-weight: bold;");
 
@@ -27,5 +40,5 @@
         await delay(2000); 
     }
 
-    console.log("%c[Discord Downloader] :tada: Fim da fila! Todos os arquivos visíveis foram processados.", "color: #5865F2; font-weight: bold; font-size: 14px;");
+    console.log("%c[Discord Downloader] 🎉 Fim da fila! Todos os arquivos visíveis foram processados.", "color: #5865F2; font-weight: bold; font-size: 14px;");
 })();
